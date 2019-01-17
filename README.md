@@ -1,6 +1,6 @@
 # Grant Identifier Metadata Schema
 
-[This schema](grantID-schema/grantID.xsd)) will be used to register persistent identifiers (DOIs) for grants and other funding through Crossref.  For the purposes of this documentation, the item being identified is a ‘grant’ but the identifier may be applied to other types of funding, such as equipment and facility use.
+[This schema](grantID-schema/grantID.xsd) will be used to register persistent identifiers (DOIs) for grants and other funding through Crossref.  For the purposes of this documentation, the item being identified is a ‘grant’ but the identifier may be applied to other types of funding, such as equipment and facility use.
 
 For those of you familiar with Crossref content registration, Grant IDs will have their own dedicated schema that differs from our publication schema.  The Grant ID schema will follow some of the same conventions as we’ll be using the same system to process the files (which will be XML) but since we are collecting metadata for a new community and moving beyond published content, this is an opportunity to rethink how we handle some basics like person names and dates.
 
