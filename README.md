@@ -1,4 +1,4 @@
-# grantID-s# Grant Identifier Metadata Schema
+# Grant Identifier Metadata Schema
 
 This schema is used to register persistent identifiers (DOIs) for grants and other funding through Crossref.  For the purposes of this documentation, the item being identified is a ‘grant’ but the identifier may be applied to other types of funding, such as equipment and facility use.
 
