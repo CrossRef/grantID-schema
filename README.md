@@ -1,10 +1,15 @@
 # Grant Identifier Metadata Schema
 
-This schema is used to register persistent identifiers (DOIs) for grants and other funding through Crossref.  For the purposes of this documentation, the item being identified is a ‘grant’ but the identifier may be applied to other types of funding, such as equipment and facility use.
+[This schema](grantID-schema/grantID.xsd)) will be used to register persistent identifiers (DOIs) for grants and other funding through Crossref.  For the purposes of this documentation, the item being identified is a ‘grant’ but the identifier may be applied to other types of funding, such as equipment and facility use.
 
-The proposed schema is available for feedback.  [Oxygen-generated documentation](http://data.crossref.org/reports/help/schema_doc/grantID/index.html) is available as well.
+For those of you familiar with Crossref content registration, Grant IDs will have their own dedicated schema that differs from our publication schema.  The Grant ID schema will follow some of the same conventions as we’ll be using the same system to process the files (which will be XML) but since we are collecting metadata for a new community and moving beyond published content, this is an opportunity to rethink how we handle some basics like person names and dates.
+
+The proposed schema is [available for feedback](grantID-schema/grantID.xsd). Please create issues if you have comments or questions, or contact pfeeney@crossref.org directly if you prefer email.  
+
+[Oxygen-generated documentation](http://data.crossref.org/reports/help/schema_doc/grantID/index.html) is available as well.
 
 ## Grant metadata
+Each grant ID can be assigned to multiple projects. The metadata within each project includes basics like titles, descriptions, and investigator information (including affiliations) as well as funding information. Funders will supply funder information (including funder identifiers from the Crossref Funder Registry) as well as information about funding types and amounts.
 
 Multiple grants may be included in a single XML file. Project metadata is included for each grant and multiple projects may be applied to a single grant. 
 
