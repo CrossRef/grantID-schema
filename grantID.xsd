@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  
+          *************************************
+          *     Crossref Grant ID Schema      *
+          *                                   *
+          *           VERSION 1.0             *
+          *                                   *
+          *         January 17, 2019          *
+          *************************************
+          
+  -->
+<xsd:schema xmlns="http://www.crossref.org/schema/1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://www.crossref.org/schema/1.0" xml:lang="EN"
+  xmlns:rel="http://www.crossref.org/relations.xsd">
+
+  <xsd:import namespace="http://www.w3.org/XML/1998/namespace"
+    schemaLocation="http://www.w3.org/2009/01/xml.xsd"/>
+  <xsd:import namespace="http://www.crossref.org/relations.xsd" schemaLocation="relations.xsd"/>
+<!-- 
+        *******************************
+  
+                Header elements
+  
+        *******************************
+  -->
+  <xsd:element name="doi_batch">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="head"/>
+        <xsd:element ref="body"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="head">
+    <xsd:annotation>
+      <xsd:documentation>Container for information related to metadata record submission</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="doi_batch_id"> </xsd:element>
+        <xsd:element ref="timestamp"/>
+        <xsd:element ref="depositor"/>
+        <xsd:element ref="registrant"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="doi_batch_id">
+    <xsd:annotation>
+      <xsd:documentation>Member-generated ID that uniquely identifies a submission. The batch ID is used in error messages and can be used to track submissions. It is recommended that the batch ID be unique for each submission.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="100"/>
+        <xsd:minLength value="4"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="timestamp">
+    <xsd:annotation>
+      <xsd:documentation>The timestamp version of a batch file instance or DOI. The timestamp is used to uniquely identify batch files and DOI values when a DOI has been updated one or more times. timestamp is an integer representation of date and time that serves as a version number for the record that is being deposited. We don't mandate a specific timestamp format, but YYYYMMDDHHMMSSmmm is recommended. When you update the record for a DOI, our system compares the timestamp in your update to the timestamp of the previous submission of the DOI. If the update has a time stamp value that is greater than the timestamp used for the previous update, the new data will replace the old data. If the new timestamp value is less than the old timestamp value, the update will be rejected. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:nonNegativeInteger">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="9999999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="depositor">
+    <xsd:annotation>
+      <xsd:documentation>Information about the organization submitting metadata records to Crossref</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="depositor_name"/>
+        <xsd:element ref="email_address"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="depositor_name">
+    <xsd:annotation>
+      <xsd:documentation>Name of the organization registering the metadata records. This name should match the name under which a depositing organization has registered with Crossref.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="130"/>
+        <xsd:minLength value="1"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="email_address">
+    <xsd:annotation>
+      <xsd:documentation>e-mail address to which batch success and/or error messages are sent. It is recommended that this address be unique to a position within the organization submitting data (e.g. "doi@...") rather than unique to a person. In this way, the alias for delivery of this mail can be changed as responsibility for submission of DOI data within the organization changes from one person to another. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="200"/>
+        <xsd:minLength value="6"/>
+        <xsd:pattern
+          value="[\p{L}\p{N}!/+\-_]+(\.[\p{L}\p{N}!/+\-_]+)*@[\p{L}\p{N}!/+\-_]+(\.[\p{L}_-]+)+"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="registrant">
+    <xsd:annotation>
+      <xsd:documentation>The organization that owns the content being registered. This is often the publisher of the content. Note that 'registrant' and 'depositor_name' values may be the same. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="255"/>
+        <xsd:minLength value="1"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+
+  <!-- 
+        *******************************
+  
+                Grant Metadata
+  
+        *******************************
+  -->
+
+  <xsd:element name="body">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="grant">
+          <xsd:annotation>
+            <xsd:documentation>Wrapper for grant metadata</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="grant">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element maxOccurs="unbounded" ref="project">
+        </xsd:element>
+        <xsd:element ref="award-number">
+        </xsd:element>
+        <xsd:element ref="rel:program" minOccurs="0"/>
+        <xsd:element ref="doi_data">
+          <xsd:annotation>
+            <xsd:documentation>Wrapper for DOI and URL(s)</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <!-- ********* Project info ********* -->
+  
+  <xsd:element name="project">
+    <xsd:annotation>
+      <xsd:documentation>Contains metadata describing a single project the grant is awarded to, multiple are allowed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element maxOccurs="unbounded" ref="project-title"/>
+        <xsd:element ref="investigators"/>
+        <xsd:element ref="description" minOccurs="0" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>a description or abstract of the project. Multiple descriptions may be provided.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element ref="award_amount" minOccurs="0" maxOccurs="1">
+          <xsd:annotation>
+            <xsd:documentation>The overall award amount supplied by a grant. Optional</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element ref="funding" maxOccurs="unbounded"/>
+        <xsd:element ref="award-dates" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="project-title">
+    <xsd:annotation>
+      <xsd:documentation>Title of the project a grant is awarded to. A title may be supplied in multiple languages</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="true">
+      <xsd:attribute ref="xml:lang"/>
+    </xsd:complexType>
+  </xsd:element>
+  
+  
+  <!-- ********* Investigator info *********-->
+  
+  <xsd:element name="investigators">
+    <xsd:annotation>
+      <xsd:documentation>Project investigator(s)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element maxOccurs="unbounded" ref="person"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="person">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="givenName" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="familyName" minOccurs="0" maxOccurs="1">
+          <xsd:annotation>
+            <xsd:documentation>Family name / surname of investigator</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element ref="alternateName" minOccurs="0" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>alias or alternate name of investigator</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element ref="affiliation" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element ref="ORCID" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+      <xsd:attribute name="start-date" type="xsd:date" use="optional"/>
+      <xsd:attribute name="end-date" type="xsd:date" use="optional"/>
+      <xsd:attribute name="role" use="required">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:NMTOKEN">
+            <xsd:enumeration value="lead_investigator"/>
+            <xsd:enumeration value="co-lead_investigator"/>
+            <xsd:enumeration value="investigator"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="givenName" type="xsd:string"/>
+  <xsd:element name="familyName" type="xsd:string"/>
+  <xsd:element name="alternateName" type="xsd:string"/>
+  <xsd:element name="affiliation">
+    <xsd:annotation>
+      <xsd:documentation>Affiliation information for investigator. Multiple allowed, include distinct affiliations in distinct affiliation elements.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="institution"/>
+        <xsd:element ref="ROR" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="institution" type="xsd:string"/>
+  <xsd:element name="ROR" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Research Organization Registry identifier (http://ror.community). ROR is still in the planning stages but funders will be able to include ROR IDs in grant registration metadata in the future.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ORCID">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:pattern value="https://orcid.org/[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9]{1}"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="description">
+    <xsd:complexType mixed="true">
+      <xsd:attribute ref="xml:lang"/>
+    </xsd:complexType>
+  </xsd:element>
+  
+  
+  <!-- ********* Funding info *********-->
+  
+  <xsd:element name="award_amount">
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:decimal">
+          <xsd:attributeGroup ref="currency.atts"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="funding">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="funder-name">
+          <xsd:annotation>
+            <xsd:documentation>Name of the funder issuing the award </xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element ref="funder-id">
+          <xsd:annotation>
+            <xsd:documentation>Funder identifier from the Crossref Funder Registry (https://www.crossref.org/services/funder-registry/)</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element ref="funding-scheme" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="amount" type="xsd:decimal"/>
+      <xsd:attributeGroup ref="currency.atts"/>
+      <xsd:attribute name="funding-percentage" type="xsd:integer"/>
+      <xsd:attribute name="funding-type" use="required">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:NMTOKEN">
+            <xsd:enumeration value="award"/>
+            <xsd:enumeration value="contract"/>
+            <xsd:enumeration value="grant"/>
+            <xsd:enumeration value="salary-award"/>
+            <xsd:enumeration value="endowment"/>
+            <xsd:enumeration value="secondment"/>
+            <xsd:enumeration value="loan"/>
+            <xsd:enumeration value="facilities"/>
+            <xsd:enumeration value="equipment"/>
+            <xsd:enumeration value="seed-funding"/>
+            <xsd:enumeration value="fellowship"/>
+            <xsd:enumeration value="training-grant"/>
+            <xsd:enumeration value="other"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="null-amount">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:NMTOKEN">
+            <xsd:enumeration value="unknown"/>
+            <xsd:enumeration value="undisclosed"/>
+            <xsd:enumeration value="not-applicable"/>
+            <xsd:enumeration value="other"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="funder-name" type="xsd:string"/>
+  <xsd:element name="funder-id">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:pattern value="https://doi.org/10\.[0-9]{4,9}/.{1,200}"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="funding-scheme" type="xsd:string"/>
+  <xsd:element name="award-dates">
+    <xsd:complexType>
+      <xsd:attribute name="start-date" type="xsd:date"/>
+      <xsd:attribute name="end-date" type="xsd:date"/>
+      <xsd:attribute name="planned-start-date" type="xsd:date"/>
+      <xsd:attribute name="planned-end-date" type="xsd:date"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:attributeGroup name="currency.atts">
+    <xsd:attribute name="currency">
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:NMTOKEN">
+          <xsd:enumeration value="AFA"/>
+          <xsd:enumeration value="ALL"/>
+          <xsd:enumeration value="DZD"/>
+          <xsd:enumeration value="AON"/>
+          <xsd:enumeration value="ARS"/>
+          <xsd:enumeration value="AMD"/>
+          <xsd:enumeration value="AWG"/>
+          <xsd:enumeration value="AUD"/>
+          <xsd:enumeration value="ATS"/>
+          <xsd:enumeration value="AZM"/>
+          <xsd:enumeration value="BSD"/>
+          <xsd:enumeration value="BHD"/>
+          <xsd:enumeration value="BDT"/>
+          <xsd:enumeration value="BBD"/>
+          <xsd:enumeration value="BYR"/>
+          <xsd:enumeration value="BEF"/>
+          <xsd:enumeration value="BZD"/>
+          <xsd:enumeration value="BMD"/>
+          <xsd:enumeration value="BTN"/>
+          <xsd:enumeration value="BOB"/>
+          <xsd:enumeration value="BAM"/>
+          <xsd:enumeration value="BWP"/>
+          <xsd:enumeration value="BRL"/>
+          <xsd:enumeration value="BND"/>
+          <xsd:enumeration value="BGL"/>
+          <xsd:enumeration value="BIF"/>
+          <xsd:enumeration value="KHR"/>
+          <xsd:enumeration value="CAD"/>
+          <xsd:enumeration value="CVE"/>
+          <xsd:enumeration value="KYD"/>
+          <xsd:enumeration value="XOF"/>
+          <xsd:enumeration value="XAF"/>
+          <xsd:enumeration value="XPF"/>
+          <xsd:enumeration value="CLP"/>
+          <xsd:enumeration value="CNY"/>
+          <xsd:enumeration value="COP"/>
+          <xsd:enumeration value="KMF"/>
+          <xsd:enumeration value="CDF"/>
+          <xsd:enumeration value="CRC"/>
+          <xsd:enumeration value="HRK"/>
+          <xsd:enumeration value="CUP"/>
+          <xsd:enumeration value="CYP"/>
+          <xsd:enumeration value="CZK"/>
+          <xsd:enumeration value="DKK"/>
+          <xsd:enumeration value="DEM"/>
+          <xsd:enumeration value="DJF"/>
+          <xsd:enumeration value="DOP"/>
+          <xsd:enumeration value="NLG"/>
+          <xsd:enumeration value="XCD"/>
+          <xsd:enumeration value="ECS"/>
+          <xsd:enumeration value="EGP"/>
+          <xsd:enumeration value="SVC"/>
+          <xsd:enumeration value="ERN"/>
+          <xsd:enumeration value="EEK"/>
+          <xsd:enumeration value="ETB"/>
+          <xsd:enumeration value="EUR"/>
+          <xsd:enumeration value="FKP"/>
+          <xsd:enumeration value="FJD"/>
+          <xsd:enumeration value="FIM"/>
+          <xsd:enumeration value="FRF"/>
+          <xsd:enumeration value="GMD"/>
+          <xsd:enumeration value="GEL"/>
+          <xsd:enumeration value="GHC"/>
+          <xsd:enumeration value="GIP"/>
+          <xsd:enumeration value="GRD"/>
+          <xsd:enumeration value="GTQ"/>
+          <xsd:enumeration value="GYD"/>
+          <xsd:enumeration value="HTG"/>
+          <xsd:enumeration value="HNL"/>
+          <xsd:enumeration value="HKD"/>
+          <xsd:enumeration value="HUF"/>
+          <xsd:enumeration value="ISK"/>
+          <xsd:enumeration value="INR"/>
+          <xsd:enumeration value="IDR"/>
+          <xsd:enumeration value="IRR"/>
+          <xsd:enumeration value="IQD"/>
+          <xsd:enumeration value="IEP"/>
+          <xsd:enumeration value="ILS"/>
+          <xsd:enumeration value="ITL"/>
+          <xsd:enumeration value="JMD"/>
+          <xsd:enumeration value="JPY"/>
+          <xsd:enumeration value="JOD"/>
+          <xsd:enumeration value="KZT"/>
+          <xsd:enumeration value="KES"/>
+          <xsd:enumeration value="KWD"/>
+          <xsd:enumeration value="KGS"/>
+          <xsd:enumeration value="LAK"/>
+          <xsd:enumeration value="LVL"/>
+          <xsd:enumeration value="LBP"/>
+          <xsd:enumeration value="LSL"/>
+          <xsd:enumeration value="LRD"/>
+          <xsd:enumeration value="LYD"/>
+          <xsd:enumeration value="LTL"/>
+          <xsd:enumeration value="LUF"/>
+          <xsd:enumeration value="MOP"/>
+          <xsd:enumeration value="MKD"/>
+          <xsd:enumeration value="MGF"/>
+          <xsd:enumeration value="MWK"/>
+          <xsd:enumeration value="MYR"/>
+          <xsd:enumeration value="MVR"/>
+          <xsd:enumeration value="MTL"/>
+          <xsd:enumeration value="MRO"/>
+          <xsd:enumeration value="MUR"/>
+          <xsd:enumeration value="MXN"/>
+          <xsd:enumeration value="MDL"/>
+          <xsd:enumeration value="MNT"/>
+          <xsd:enumeration value="MAD"/>
+          <xsd:enumeration value="MZM"/>
+          <xsd:enumeration value="MMK"/>
+          <xsd:enumeration value="NAD"/>
+          <xsd:enumeration value="NPR"/>
+          <xsd:enumeration value="ANG"/>
+          <xsd:enumeration value="ZRN"/>
+          <xsd:enumeration value="NZD"/>
+          <xsd:enumeration value="NIC"/>
+          <xsd:enumeration value="NGN"/>
+          <xsd:enumeration value="KPW"/>
+          <xsd:enumeration value="NOK"/>
+          <xsd:enumeration value="PKR"/>
+          <xsd:enumeration value="PAB"/>
+          <xsd:enumeration value="PGK"/>
+          <xsd:enumeration value="PYG"/>
+          <xsd:enumeration value="PEN"/>
+          <xsd:enumeration value="PHP"/>
+          <xsd:enumeration value="PLN"/>
+          <xsd:enumeration value="PTE"/>
+          <xsd:enumeration value="QAR"/>
+          <xsd:enumeration value="OMR"/>
+          <xsd:enumeration value="ROL"/>
+          <xsd:enumeration value="RUR"/>
+          <xsd:enumeration value="RWF"/>
+          <xsd:enumeration value="STD"/>
+          <xsd:enumeration value="SAR"/>
+          <xsd:enumeration value="SCR"/>
+          <xsd:enumeration value="SLL"/>
+          <xsd:enumeration value="SGD"/>
+          <xsd:enumeration value="SKK"/>
+          <xsd:enumeration value="SIT"/>
+          <xsd:enumeration value="SBD"/>
+          <xsd:enumeration value="SOS"/>
+          <xsd:enumeration value="ZAR"/>
+          <xsd:enumeration value="KRW"/>
+          <xsd:enumeration value="ESP"/>
+          <xsd:enumeration value="LKR"/>
+          <xsd:enumeration value="SHP"/>
+          <xsd:enumeration value="GBP"/>
+          <xsd:enumeration value="SDP"/>
+          <xsd:enumeration value="SRG"/>
+          <xsd:enumeration value="SZL"/>
+          <xsd:enumeration value="SEK"/>
+          <xsd:enumeration value="CHF"/>
+          <xsd:enumeration value="SYP"/>
+          <xsd:enumeration value="TWD"/>
+          <xsd:enumeration value="TJR"/>
+          <xsd:enumeration value="TZS"/>
+          <xsd:enumeration value="THB"/>
+          <xsd:enumeration value="TPE"/>
+          <xsd:enumeration value="TOP"/>
+          <xsd:enumeration value="TTD"/>
+          <xsd:enumeration value="TND"/>
+          <xsd:enumeration value="TRL"/>
+          <xsd:enumeration value="TMM"/>
+          <xsd:enumeration value="AED"/>
+          <xsd:enumeration value="UGX"/>
+          <xsd:enumeration value="UAH"/>
+          <xsd:enumeration value="UYU"/>
+          <xsd:enumeration value="USD"/>
+          <xsd:enumeration value="UZS"/>
+          <xsd:enumeration value="VUV"/>
+          <xsd:enumeration value="VEB"/>
+          <xsd:enumeration value="VND"/>
+          <xsd:enumeration value="WST"/>
+          <xsd:enumeration value="YER"/>
+          <xsd:enumeration value="YUM"/>
+          <xsd:enumeration value="ZMK"/>
+          <xsd:enumeration value="ZWD"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:attributeGroup>
+  
+  
+  <!-- ********* Grant / award identifiers *********-->
+  
+  <xsd:element name="award-number" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Funder-assigned award or grant number </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="doi_data">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="doi"/>
+        <xsd:element ref="resource"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="doi">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="2048"/>
+        <xsd:minLength value="6"/>
+        <xsd:pattern value="10\.[0-9]{4,9}/.{1,200}"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="resource" type="xsd:anyURI"/>
+ 
+</xsd:schema>
