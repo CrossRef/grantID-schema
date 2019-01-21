@@ -73,7 +73,7 @@ Types of funding are limited to the following values:
 * contract
 * grant
 * salary-award
-* endowment: 
+* endowment 
 * secondment
 * loan
 * facilities
