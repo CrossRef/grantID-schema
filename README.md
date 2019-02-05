@@ -4,7 +4,7 @@
 
 For those of you familiar with Crossref content registration, Grant IDs will have their own dedicated schema that differs from our publication schema.  The Grant ID schema will follow some of the same conventions as we’ll be using the same system to process the files (which will be XML) but since we are collecting metadata for a new community and moving beyond published content, this is an opportunity to rethink how we handle some basics like person names and dates.
 
-The proposed schema is [available for feedback](grantID-schema/grantID.xsd). Please create issues if you have comments or questions, or contact pfeeney@crossref.org directly if you prefer email.  
+The proposed schema is [available for feedback](grantID-schema/grantID.xsd). Please create issues if you have comments or questions, or contact feedback@crossref.org directly if you prefer email.  
 
 [Oxygen-generated documentation](http://data.crossref.org/reports/help/schema_doc/grantID/index.html) is available as well.
 
