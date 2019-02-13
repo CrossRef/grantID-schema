@@ -325,7 +325,7 @@
   <xsd:element name="funder-id">
     <xsd:simpleType>
       <xsd:restriction base="xsd:string">
-        <xsd:pattern value="https://doi.org/10\.[0-9]{4,9}/.{1,200}"/>
+        <xsd:pattern value="[https://doi.org/10\.13039/.{1,200}"/>
       </xsd:restriction>
     </xsd:simpleType>
   </xsd:element>
