@@ -81,4 +81,4 @@ Types of funding are limited to the following values:
 * seed-funding
 * fellowship
 * training-grant
-* other schema
+* other
