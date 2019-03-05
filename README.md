@@ -8,6 +8,12 @@ The proposed schema is [available for feedback](https://github.com/CrossRef/gran
 
 [Oxygen-generated documentation](http://data.crossref.org/reports/help/schema_doc/grantID/index.html) is available as well.
 
+## Updates
+
+The proposed schema has been updated March 5 based on feedback given in February. Updates made are:
+* additions to funding type taxonomy (prize, crowdfunding)
+* addition of country attribute with ISO 3166-1 alpha 2-letter country code values on institution element within investigator affiliation section (currently optional)
+
 ## Grant metadata
 Each grant ID can be assigned to multiple projects. The metadata within each project includes basics like titles, descriptions, and investigator information (including affiliations) as well as funding information. Funders will supply funder information (including funder identifiers from the Crossref Funder Registry) as well as information about funding types and amounts.
 
@@ -36,6 +42,7 @@ familyName | family or surname | optional
 alternateName | alias or nickname used by the Investigator | optional
 affiliation | container for affiliation information | optional, multiple allowed
 institution | institution an investigator is affiliated with when associated with the project being defined.  Multiple affiliations should be supplied where applicable | 1 allowed, use multiple `affiliation` groups for investigators with multiple affiliations
+@country | ISO 3166-1 alpha 2-letter country code, captures location (country) of affiliation | optional
 ROR* | A ROR ID may be supplied in the future to disambiguate affiliation information. Note that ROR is a new initative and is not yet available. | pending
 ORCID | ORCID ID of the investigator, expressed as a URL | optional
 
@@ -69,16 +76,18 @@ award-dates | container for date information | optional
 
 Types of funding are limited to the following values:
 
-* award
-* contract
-* grant
-* salary-award
-* endowment 
-* secondment
-* loan
-* facilities
-* equipment
-* seed-funding
-* fellowship
-* training-grant
-* other
+* **award:** a prize, award, or other type of general funding
+* **contract:** agreement involving payment
+* **crowdfunding:** funding raised via multiple sources, typically small amounts raised online
+* **endowment:** gift of money that will provide an income
+* **equipment:** use of or gift of equipment 
+* **facilities:** use of location, equipment, or other resources
+* **fellowship:** grant given for research or study
+* **grant:** a monetary award
+* **loan:** money or other resource given in anticipation of repayment
+* **other:** award of undefined type
+* **prize:** an award given for achievement
+* **salary-award:** an award given as salary, includes intramural research funding
+* **secondment:** detachment of a person or resource for temporary assignment elsewhere
+* **seed-funding:** an investor invests capital in exchange for equity
+* **training-grant:** grant given for training
