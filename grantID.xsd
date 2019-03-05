@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
   
-          *************************************
-          *     Crossref Grant ID Schema      *
-          *                                   *
-          *           VERSION 1.0             *
-          *                                   *
-          *         January 17, 2019          *
-          *************************************
-          
+          ***************************************
+          *  Crossref Grant ID Schema (draft)   *
+          *                                     *
+          *           March 3, 2019             *
+          ***************************************
+ UPDATES
+  - 2/13/19 update regex for funder ID
+  - 3/3/2019 added funding types; add 'country' attribute for 'institution' ISO 3166-1 
   -->
 <xsd:schema xmlns="http://www.crossref.org/schema/1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   targetNamespace="http://www.crossref.org/schema/1.0" xml:lang="EN"
@@ -17,7 +17,7 @@
   <xsd:import namespace="http://www.w3.org/XML/1998/namespace"
     schemaLocation="http://www.w3.org/2009/01/xml.xsd"/>
   <xsd:import namespace="http://www.crossref.org/relations.xsd" schemaLocation="relations.xsd"/>
-<!-- 
+  <!-- 
         *******************************
   
                 Header elements
@@ -136,10 +136,8 @@
   <xsd:element name="grant">
     <xsd:complexType>
       <xsd:sequence>
-        <xsd:element maxOccurs="unbounded" ref="project">
-        </xsd:element>
-        <xsd:element ref="award-number">
-        </xsd:element>
+        <xsd:element maxOccurs="unbounded" ref="project"> </xsd:element>
+        <xsd:element ref="award-number"> </xsd:element>
         <xsd:element ref="rel:program" minOccurs="0"/>
         <xsd:element ref="doi_data">
           <xsd:annotation>
@@ -149,9 +147,9 @@
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>
-  
+
   <!-- ********* Project info ********* -->
-  
+
   <xsd:element name="project">
     <xsd:annotation>
       <xsd:documentation>Contains metadata describing a single project the grant is awarded to, multiple are allowed.</xsd:documentation>
@@ -183,10 +181,10 @@
       <xsd:attribute ref="xml:lang"/>
     </xsd:complexType>
   </xsd:element>
-  
-  
+
+
   <!-- ********* Investigator info *********-->
-  
+
   <xsd:element name="investigators">
     <xsd:annotation>
       <xsd:documentation>Project investigator(s)</xsd:documentation>
@@ -241,7 +239,271 @@
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>
-  <xsd:element name="institution" type="xsd:string"/>
+  <xsd:element name="institution">
+     <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="country" use="optional">
+            <xsd:annotation><xsd:documentation>ISO 3166-1 alpha 2-letter country code</xsd:documentation></xsd:annotation>
+              <xsd:simpleType>   
+                <xsd:restriction base="xsd:NMTOKEN">
+                <xsd:enumeration value="AD"/> <!-- ANDORRA -->
+                <xsd:enumeration value="AE"/> <!-- UNITED ARAB EMIRATES -->
+                <xsd:enumeration value="AF"/> <!-- AFGHANISTAN --> 
+                <xsd:enumeration value="AG"/> <!-- ANTIGUA AND BARBUDA -->
+                <xsd:enumeration value="AI"/> <!-- ANGUILLA -->
+                <xsd:enumeration value="AL"/> <!-- ALBANIA -->
+                <xsd:enumeration value="AM"/> <!-- ARMENIA -->
+                <xsd:enumeration value="AN"/> <!-- NETHERLANDS ANTILLES -->
+                <xsd:enumeration value="AO"/> <!-- ANGOLA -->
+                <xsd:enumeration value="AQ"/> <!-- ANTARCTICA -->
+                <xsd:enumeration value="AR"/> <!-- ARGENTINA -->
+                <xsd:enumeration value="AS"/> <!-- AMERICAN SAMOA -->
+                <xsd:enumeration value="AT"/> <!-- AUSTRIA -->
+                <xsd:enumeration value="AU"/> <!-- AUSTRALIA -->
+                <xsd:enumeration value="AW"/> <!-- ARUBA -->
+                <xsd:enumeration value="AX"/> <!-- &Aring;LAND ISLANDS -->
+                <xsd:enumeration value="AZ"/> <!-- AZERBAIJAN -->
+                <xsd:enumeration value="BA"/> <!-- BOSNIA AND HERZEGOVINA -->
+                <xsd:enumeration value="BB"/> <!-- BARBADOS -->
+                <xsd:enumeration value="BD"/> <!-- BANGLADESH -->
+                <xsd:enumeration value="BE"/> <!-- BELGIUM -->
+                <xsd:enumeration value="BF"/> <!-- BURKINA FASO -->
+                <xsd:enumeration value="BG"/> <!-- BULGARIA -->
+                <xsd:enumeration value="BH"/> <!-- BAHRAIN -->
+                <xsd:enumeration value="BI"/> <!-- BURUNDI -->
+                <xsd:enumeration value="BJ"/> <!-- BENIN -->
+                <xsd:enumeration value="BL"/> <!-- SAINT BARTH&Eacute;LEMY -->
+                <xsd:enumeration value="BM"/> <!-- BERMUDA -->
+                <xsd:enumeration value="BN"/> <!-- BRUNEI DARUSSALAM -->
+                <xsd:enumeration value="BO"/> <!-- BOLIVIA -->
+                <xsd:enumeration value="BQ"/> <!--BONAIRE, SINT EUSTATIUS AND SABA-->
+                <xsd:enumeration value="BR"/> <!-- BRAZIL -->
+                <xsd:enumeration value="BS"/> <!-- BAHAMAS -->
+                <xsd:enumeration value="BT"/> <!-- BHUTAN -->
+                <xsd:enumeration value="BV"/> <!-- BOUVET ISLAND -->
+                <xsd:enumeration value="BW"/> <!-- BOTSWANA -->
+                <xsd:enumeration value="BY"/> <!-- BELARUS -->
+                <xsd:enumeration value="BZ"/> <!-- BELIZE -->
+                <xsd:enumeration value="CA"/> <!-- CANADA -->
+                <xsd:enumeration value="CC"/> <!-- COCOS (KEELING) ISLANDS -->
+                <xsd:enumeration value="CD"/> <!-- CONGO, THE DEMOCRATIC REPUBLIC OF THE -->
+                <xsd:enumeration value="CF"/> <!-- CENTRAL AFRICAN REPUBLIC -->
+                <xsd:enumeration value="CG"/> <!-- CONGO -->
+                <xsd:enumeration value="CH"/> <!-- SWITZERLAND -->
+                <xsd:enumeration value="CI"/> <!-- COTE D'IVOIRE -->
+                <xsd:enumeration value="CK"/> <!-- COOK ISLANDS -->
+                <xsd:enumeration value="CL"/> <!-- CHILE -->
+                <xsd:enumeration value="CM"/> <!-- CAMEROON -->
+                <xsd:enumeration value="CN"/> <!-- CHINA -->
+                <xsd:enumeration value="CO"/> <!-- COLOMBIA -->
+                <xsd:enumeration value="CR"/> <!-- COSTA RICA -->
+                <xsd:enumeration value="CS"/> <!-- SERBIA AND MONTENEGRO -->
+                <xsd:enumeration value="CU"/> <!-- CUBA -->
+                <xsd:enumeration value="CV"/> <!-- CAPE VERDE -->
+                <xsd:enumeration value="CW"/> <!-- CURAÇAO -->
+                <xsd:enumeration value="CX"/> <!-- CHRISTMAS ISLAND -->
+                <xsd:enumeration value="CY"/> <!-- CYPRUS -->
+                <xsd:enumeration value="CZ"/> <!-- CZECH REPUBLIC -->
+                <xsd:enumeration value="DE"/> <!-- GERMANY -->
+                <xsd:enumeration value="DJ"/> <!-- DJIBOUTI -->
+                <xsd:enumeration value="DK"/> <!-- DENMARK -->
+                <xsd:enumeration value="DM"/> <!-- DOMINICA -->
+                <xsd:enumeration value="DO"/> <!-- DOMINICAN REPUBLIC -->
+                <xsd:enumeration value="DZ"/> <!-- ALGERIA -->
+                <xsd:enumeration value="EC"/> <!-- ECUADOR -->
+                <xsd:enumeration value="EE"/> <!-- ESTONIA -->
+                <xsd:enumeration value="EG"/> <!-- EGYPT -->
+                <xsd:enumeration value="EH"/> <!-- WESTERN SAHARA -->
+                <xsd:enumeration value="ER"/> <!-- ERITREA -->
+                <xsd:enumeration value="ES"/> <!-- SPAIN -->
+                <xsd:enumeration value="ET"/> <!-- ETHIOPIA -->
+                <xsd:enumeration value="FI"/> <!-- FINLAND -->
+                <xsd:enumeration value="FJ"/> <!-- FIJI -->
+                <xsd:enumeration value="FK"/> <!-- FALKLAND ISLANDS (MALVINAS) -->
+                <xsd:enumeration value="FM"/> <!-- MICRONESIA, FEDERATED STATES OF -->
+                <xsd:enumeration value="FO"/> <!-- FAROE ISLANDS -->
+                <xsd:enumeration value="FR"/> <!-- FRANCE -->
+                <xsd:enumeration value="GA"/> <!-- GABON -->
+                <xsd:enumeration value="GB"/> <!-- UNITED KINGDOM -->
+                <xsd:enumeration value="GD"/> <!-- GRENADA -->
+                <xsd:enumeration value="GE"/> <!-- GEORGIA -->
+                <xsd:enumeration value="GF"/> <!-- FRENCH GUIANA -->
+                <xsd:enumeration value="GG"/> <!-- GUERNSEY -->
+                <xsd:enumeration value="GH"/> <!-- GHANA -->
+                <xsd:enumeration value="GI"/> <!-- GIBRALTAR -->
+                <xsd:enumeration value="GL"/> <!-- GREENLAND -->
+                <xsd:enumeration value="GM"/> <!-- GAMBIA -->
+                <xsd:enumeration value="GN"/> <!-- GUINEA -->
+                <xsd:enumeration value="GP"/> <!-- GUADELOUPE -->
+                <xsd:enumeration value="GQ"/> <!-- EQUATORIAL GUINEA -->
+                <xsd:enumeration value="GR"/> <!-- GREECE -->
+                <xsd:enumeration value="GS"/> <!-- SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS -->
+                <xsd:enumeration value="GT"/> <!-- GUATEMALA -->
+                <xsd:enumeration value="GU"/> <!-- GUAM -->
+                <xsd:enumeration value="GW"/> <!-- GUINEA-BISSAU -->
+                <xsd:enumeration value="GY"/> <!-- GUYANA -->
+                <xsd:enumeration value="HK"/> <!-- HONG KONG -->
+                <xsd:enumeration value="HM"/> <!-- HEARD ISLAND AND MCDONALD ISLANDS -->
+                <xsd:enumeration value="HN"/> <!-- HONDURAS -->
+                <xsd:enumeration value="HR"/> <!-- CROATIA -->
+                <xsd:enumeration value="HT"/> <!-- HAITI -->
+                <xsd:enumeration value="HU"/> <!-- HUNGARY -->
+                <xsd:enumeration value="ID"/> <!-- INDONESIA -->
+                <xsd:enumeration value="IE"/> <!-- IRELAND -->
+                <xsd:enumeration value="IL"/> <!-- ISRAEL -->
+                <xsd:enumeration value="IM"/> <!-- ISLE OF MAN -->
+                <xsd:enumeration value="IN"/> <!-- INDIA -->
+                <xsd:enumeration value="IO"/> <!-- BRITISH INDIAN OCEAN TERRITORY -->
+                <xsd:enumeration value="IQ"/> <!-- IRAQ -->
+                <xsd:enumeration value="IR"/> <!-- IRAN, ISLAMIC REPUBLIC OF -->
+                <xsd:enumeration value="IS"/> <!-- ICELAND -->
+                <xsd:enumeration value="IT"/> <!-- ITALY -->
+                <xsd:enumeration value="JE"/> <!-- JERSEY -->
+                <xsd:enumeration value="JM"/> <!-- JAMAICA -->
+                <xsd:enumeration value="JO"/> <!-- JORDAN -->
+                <xsd:enumeration value="JP"/> <!-- JAPAN -->
+                <xsd:enumeration value="KE"/> <!-- KENYA -->
+                <xsd:enumeration value="KG"/> <!-- KYRGYZSTAN -->
+                <xsd:enumeration value="KH"/> <!-- CAMBODIA -->
+                <xsd:enumeration value="KI"/> <!-- KIRIBATI -->
+                <xsd:enumeration value="KM"/> <!-- COMOROS -->
+                <xsd:enumeration value="KN"/> <!-- SAINT KITTS AND NEVIS -->
+                <xsd:enumeration value="KP"/> <!-- KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF -->
+                <xsd:enumeration value="KR"/> <!-- KOREA, REPUBLIC OF -->
+                <xsd:enumeration value="KW"/> <!-- KUWAIT -->
+                <xsd:enumeration value="KY"/> <!-- CAYMAN ISLANDS -->
+                <xsd:enumeration value="KZ"/> <!-- KAZAKHSTAN -->
+                <xsd:enumeration value="LA"/> <!-- LAO PEOPLE'S DEMOCRATIC REPUBLIC -->
+                <xsd:enumeration value="LB"/> <!-- LEBANON -->
+                <xsd:enumeration value="LC"/> <!-- SAINT LUCIA -->
+                <xsd:enumeration value="LI"/> <!-- LIECHTENSTEIN -->
+                <xsd:enumeration value="LK"/> <!-- SRI LANKA -->
+                <xsd:enumeration value="LR"/> <!-- LIBERIA -->
+                <xsd:enumeration value="LS"/> <!-- LESOTHO -->
+                <xsd:enumeration value="LT"/> <!-- LITHUANIA -->
+                <xsd:enumeration value="LU"/> <!-- LUXEMBOURG -->
+                <xsd:enumeration value="LV"/> <!-- LATVIA -->
+                <xsd:enumeration value="LY"/> <!-- LIBYAN ARAB JAMAHIRIYA -->
+                <xsd:enumeration value="MA"/> <!-- MOROCCO -->
+                <xsd:enumeration value="MC"/> <!-- MONACO -->
+                <xsd:enumeration value="MD"/> <!-- MOLDOVA, REPUBLIC OF -->
+                <xsd:enumeration value="MF"/> <!-- SAINT MARTIN -->
+                <xsd:enumeration value="MG"/> <!-- MADAGASCAR -->
+                <xsd:enumeration value="MH"/> <!-- MARSHALL ISLANDS -->
+                <xsd:enumeration value="MK"/> <!-- MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF -->
+                <xsd:enumeration value="ML"/> <!-- MALI -->
+                <xsd:enumeration value="MM"/> <!-- MYANMAR -->
+                <xsd:enumeration value="MN"/> <!-- MONGOLIA -->
+                <xsd:enumeration value="MO"/> <!-- MACAO -->
+                <xsd:enumeration value="MP"/> <!-- NORTHERN MARIANA ISLANDS -->
+                <xsd:enumeration value="MQ"/> <!-- MARTINIQUE -->
+                <xsd:enumeration value="MR"/> <!-- MAURITANIA -->
+                <xsd:enumeration value="MS"/> <!-- MONTSERRAT -->
+                <xsd:enumeration value="MT"/> <!-- MALTA -->
+                <xsd:enumeration value="MU"/> <!-- MAURITIUS -->
+                <xsd:enumeration value="MV"/> <!-- MALDIVES -->
+                <xsd:enumeration value="MW"/> <!-- MALAWI -->
+                <xsd:enumeration value="MX"/> <!-- MEXICO -->
+                <xsd:enumeration value="MY"/> <!-- MALAYSIA -->
+                <xsd:enumeration value="MZ"/> <!-- MOZAMBIQUE -->
+                <xsd:enumeration value="NA"/> <!-- NAMIBIA -->
+                <xsd:enumeration value="NC"/> <!-- NEW CALEDONIA -->
+                <xsd:enumeration value="NE"/> <!-- NIGER -->
+                <xsd:enumeration value="NF"/> <!-- NORFOLK ISLAND -->
+                <xsd:enumeration value="NG"/> <!-- NIGERIA -->
+                <xsd:enumeration value="NI"/> <!-- NICARAGUA -->
+                <xsd:enumeration value="NL"/> <!-- NETHERLANDS -->
+                <xsd:enumeration value="NO"/> <!-- NORWAY -->
+                <xsd:enumeration value="NP"/> <!-- NEPAL -->
+                <xsd:enumeration value="NR"/> <!-- NAURU -->
+                <xsd:enumeration value="NU"/> <!-- NIUE -->
+                <xsd:enumeration value="NZ"/> <!-- NEW ZEALAND -->
+                <xsd:enumeration value="OM"/> <!-- OMAN -->
+                <xsd:enumeration value="PA"/> <!-- PANAMA -->
+                <xsd:enumeration value="PE"/> <!-- PERU -->
+                <xsd:enumeration value="PF"/> <!-- FRENCH POLYNESIA -->
+                <xsd:enumeration value="PG"/> <!-- PAPUA NEW GUINEA -->
+                <xsd:enumeration value="PH"/> <!-- PHILIPPINES -->
+                <xsd:enumeration value="PK"/> <!-- PAKISTAN -->
+                <xsd:enumeration value="PL"/> <!-- POLAND -->
+                <xsd:enumeration value="PM"/> <!-- SAINT PIERRE AND MIQUELON -->
+                <xsd:enumeration value="PN"/> <!-- PITCAIRN -->
+                <xsd:enumeration value="PR"/> <!-- PUERTO RICO -->
+                <xsd:enumeration value="PS"/> <!-- PALESTINIAN TERRITORY, OCCUPIED -->
+                <xsd:enumeration value="PT"/> <!-- PORTUGAL -->
+                <xsd:enumeration value="PW"/> <!-- PALAU -->
+                <xsd:enumeration value="PY"/> <!-- PARAGUAY -->
+                <xsd:enumeration value="QA"/> <!-- QATAR -->
+                <xsd:enumeration value="RE"/> <!-- REUNION -->
+                <xsd:enumeration value="RO"/> <!-- ROMANIA -->
+                <xsd:enumeration value="RU"/> <!-- RUSSIAN FEDERATION -->
+                <xsd:enumeration value="RS"/> <!-- SERBIA -->
+                <xsd:enumeration value="RW"/> <!-- RWANDA -->
+                <xsd:enumeration value="SA"/> <!-- SAUDI ARABIA -->
+                <xsd:enumeration value="SB"/> <!-- SOLOMON ISLANDS -->
+                <xsd:enumeration value="SC"/> <!-- SEYCHELLES -->
+                <xsd:enumeration value="SD"/> <!-- SUDAN -->
+                <xsd:enumeration value="SE"/> <!-- SWEDEN -->
+                <xsd:enumeration value="SG"/> <!-- SINGAPORE -->
+                <xsd:enumeration value="SH"/> <!-- SAINT HELENA -->
+                <xsd:enumeration value="SI"/> <!-- SLOVENIA -->
+                <xsd:enumeration value="SJ"/> <!-- SVALBARD AND JAN MAYEN -->
+                <xsd:enumeration value="SK"/> <!-- SLOVAKIA -->
+                <xsd:enumeration value="SL"/> <!-- SIERRA LEONE -->
+                <xsd:enumeration value="SM"/> <!-- SAN MARINO -->
+                <xsd:enumeration value="SN"/> <!-- SENEGAL -->
+                <xsd:enumeration value="SO"/> <!-- SOMALIA -->
+                <xsd:enumeration value="SR"/> <!-- SURINAME -->
+                <xsd:enumeration value="SS"/> <!-- SOUTH SUDAN -->
+                <xsd:enumeration value="ST"/> <!-- SAO TOME AND PRINCIPE -->
+                <xsd:enumeration value="SV"/> <!-- EL SALVADOR -->
+                <xsd:enumeration value="SX"/> <!-- SINT MAARTEN (DUTCH PART) -->
+                <xsd:enumeration value="SY"/> <!-- SYRIAN ARAB REPUBLIC -->
+                <xsd:enumeration value="SZ"/> <!-- SWAZILAND -->
+                <xsd:enumeration value="TC"/> <!-- TURKS AND CAICOS ISLANDS -->
+                <xsd:enumeration value="TD"/> <!-- CHAD -->
+                <xsd:enumeration value="TF"/> <!-- FRENCH SOUTHERN TERRITORIES -->
+                <xsd:enumeration value="TG"/> <!-- TOGO -->
+                <xsd:enumeration value="TH"/> <!-- THAILAND -->
+                <xsd:enumeration value="TJ"/> <!-- TAJIKISTAN -->
+                <xsd:enumeration value="TK"/> <!-- TOKELAU -->
+                <xsd:enumeration value="TL"/> <!-- TIMOR-LESTE -->
+                <xsd:enumeration value="TM"/> <!-- TURKMENISTAN -->
+                <xsd:enumeration value="TN"/> <!-- TUNISIA -->
+                <xsd:enumeration value="TO"/> <!-- TONGA -->
+                <xsd:enumeration value="TR"/> <!-- TURKEY -->
+                <xsd:enumeration value="TT"/> <!-- TRINIDAD AND TOBAGO -->
+                <xsd:enumeration value="TV"/> <!-- TUVALU -->
+                <xsd:enumeration value="TW"/> <!-- TAIWAN, PROVINCE OF CHINA -->
+                <xsd:enumeration value="TZ"/> <!-- TANZANIA, UNITED REPUBLIC OF -->
+                <xsd:enumeration value="UA"/> <!-- UKRAINE -->
+                <xsd:enumeration value="UG"/> <!-- UGANDA -->
+                <xsd:enumeration value="UM"/> <!-- UNITED STATES MINOR OUTLYING ISLANDS -->
+                <xsd:enumeration value="US"/> <!-- UNITED STATES -->
+                <xsd:enumeration value="UY"/> <!-- URUGUAY -->
+                <xsd:enumeration value="UZ"/> <!-- UZBEKISTAN -->
+                <xsd:enumeration value="VA"/> <!-- HOLY SEE (VATICAN CITY STATE) -->
+                <xsd:enumeration value="VC"/> <!-- SAINT VINCENT AND THE GRENADINES -->
+                <xsd:enumeration value="VE"/> <!-- VENEZUELA -->
+                <xsd:enumeration value="VG"/> <!-- VIRGIN ISLANDS, BRITISH -->
+                <xsd:enumeration value="VI"/> <!-- VIRGIN ISLANDS, U.S. -->
+                <xsd:enumeration value="VN"/> <!-- VIET NAM -->
+                <xsd:enumeration value="VU"/> <!-- VANUATU -->
+                <xsd:enumeration value="WF"/> <!-- WALLIS AND FUTUNA -->
+                <xsd:enumeration value="WS"/> <!-- SAMOA -->
+                <xsd:enumeration value="YE"/> <!-- YEMEN -->
+                <xsd:enumeration value="YT"/> <!-- MAYOTTE -->
+                <xsd:enumeration value="ZA"/> <!-- SOUTH AFRICA -->
+                <xsd:enumeration value="ZM"/> <!-- ZAMBIA -->
+                <xsd:enumeration value="ZW"/> <!-- ZIMBABWE -->
+                </xsd:restriction>
+              </xsd:simpleType> 
+          </xsd:attribute>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
   <xsd:element name="ROR" type="xsd:string">
     <xsd:annotation>
       <xsd:documentation>Research Organization Registry identifier (http://ror.community). ROR is still in the planning stages but funders will be able to include ROR IDs in grant registration metadata in the future.</xsd:documentation>
@@ -259,10 +521,10 @@
       <xsd:attribute ref="xml:lang"/>
     </xsd:complexType>
   </xsd:element>
-  
-  
+
+
   <!-- ********* Funding info *********-->
-  
+
   <xsd:element name="award_amount">
     <xsd:complexType>
       <xsd:simpleContent>
@@ -295,15 +557,17 @@
           <xsd:restriction base="xsd:NMTOKEN">
             <xsd:enumeration value="award"/>
             <xsd:enumeration value="contract"/>
-            <xsd:enumeration value="grant"/>
-            <xsd:enumeration value="salary-award"/>
+            <xsd:enumeration value="crowdfunding"/>
             <xsd:enumeration value="endowment"/>
-            <xsd:enumeration value="secondment"/>
-            <xsd:enumeration value="loan"/>
-            <xsd:enumeration value="facilities"/>
             <xsd:enumeration value="equipment"/>
-            <xsd:enumeration value="seed-funding"/>
+            <xsd:enumeration value="facilities"/>
             <xsd:enumeration value="fellowship"/>
+            <xsd:enumeration value="grant"/>
+            <xsd:enumeration value="loan"/>
+            <xsd:enumeration value="prize"/>
+            <xsd:enumeration value="salary-award"/>
+            <xsd:enumeration value="secondment"/>
+            <xsd:enumeration value="seed-funding"/>
             <xsd:enumeration value="training-grant"/>
             <xsd:enumeration value="other"/>
           </xsd:restriction>
@@ -325,7 +589,7 @@
   <xsd:element name="funder-id">
     <xsd:simpleType>
       <xsd:restriction base="xsd:string">
-        <xsd:pattern value="[https://doi.org/10\.13039/.{1,200}"/>
+        <xsd:pattern value="https://doi.org/10.13039/[0-9]{9}"/>
       </xsd:restriction>
     </xsd:simpleType>
   </xsd:element>
@@ -338,6 +602,10 @@
       <xsd:attribute name="planned-end-date" type="xsd:date"/>
     </xsd:complexType>
   </xsd:element>
+  
+  <!-- ***** Language and country codes ***** -->
+  
+ 
   <xsd:attributeGroup name="currency.atts">
     <xsd:attribute name="currency">
       <xsd:simpleType>
@@ -522,10 +790,10 @@
       </xsd:simpleType>
     </xsd:attribute>
   </xsd:attributeGroup>
-  
-  
+
+
   <!-- ********* Grant / award identifiers *********-->
-  
+
   <xsd:element name="award-number" type="xsd:string">
     <xsd:annotation>
       <xsd:documentation>Funder-assigned award or grant number </xsd:documentation>
@@ -549,5 +817,4 @@
     </xsd:simpleType>
   </xsd:element>
   <xsd:element name="resource" type="xsd:anyURI"/>
- 
 </xsd:schema>
