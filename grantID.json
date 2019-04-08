@@ -1,0 +1,146 @@
+{
+    "status": "ok",
+    "message-type": "work",
+    "message-version": "1.0.0",
+    "message": {
+        "indexed": {
+            "date-parts": [[
+                2019,
+                2,
+                18
+            ]],
+            "date-time": "2019-02-18T19:31:12Z",
+            "timestamp": 1550518272965
+        },
+        "publisher": "Society of Metadata Idealists",
+        "DOI": "10.32013/NIVFDJ34",
+        "type": "grant-id",
+        "created": {
+            "date-parts": [[
+                2018,
+                10,
+                23
+            ]],
+            "date-time": "2018-10-23T19:19:11Z",
+            "timestamp": 1540322351000
+        },
+        "prefix": "10.32013",
+        "member": "17333",
+        "projects": [
+            {"project": {
+                "project-title": [
+                    {
+                        "title": "Registering identifiers for grants",
+                        "language": "en"
+                    },
+                    {
+                        "title": "補助金の識別子を登録する",
+                        "language": "ja"
+                    },
+                    {
+                        "title": "Enregistrement d'identifiants pour des subventions",
+                        "language": "fr"
+                    }
+                ],
+                "lead-investigator": [{
+                    "ORCID": "http://orcid.org/0000-0002-4011-3590",
+                    "given": "Elvis",
+                    "family": "Yausudder",
+                    "alternate-name": "Elvis Slozzuffer",
+                    "affiliation": [
+                        {
+                            "name": "Crossref University",
+                            "country": "US",
+                            "ROR": "https://ror.org/02twcfp32"
+                        },
+                        {"name": "University of Metadata"}
+                    ]
+                }],
+                "co-lead-investigator": [{
+                    "given": "Valerie",
+                    "family": "Torf",
+                    "affiliation": [{
+                        "name": "Crossref",
+                        "ROR": "https://ror.org/02twcfp32"
+                    }]
+                }],
+                "award-amount": "1000",
+                "currency": "USD",
+                "funder": [
+                    {
+                        "DOI": "10.13039/100004440",
+                        "name": "Wellcome Trust",
+                        "doi-asserted-by": "publisher",
+                        "funding-type": "grant",
+                        "funding-scheme": "Metadata quality initiative",
+                        "funding-amount": {
+                            "amount": "5000,000",
+                            "currency": "USD"
+                        },
+                        "funding-percentage": "50",
+                        "award": "CR-567"
+                    },
+                    {
+                        "DOI": "10.13039/100004440",
+                        "name": "Wellcome Trust",
+                        "doi-asserted-by": "publisher",
+                        "funding-type": "prize",
+                        "funding-scheme": "Metadata is awesome prize",
+                        "funding-amount": {
+                            "amount": "5000,000",
+                            "currency": "USD"
+                        },
+                        "funding-percentage": "50",
+                        "award": "CR-567"
+                    }
+                ]
+            }},
+            {"project": {
+                "project-title": [{
+                    "title": "Metadata outputs for grant identifiers",
+                    "language": "en"
+                }],
+                "lead-investigator": [{
+                    "ORCID": "http://orcid.org/0000-0002-4011-3590",
+                    "given": "Edna",
+                    "family": "Trolb",
+                    "alternate-name": "Scarlet Zomb",
+                    "affiliation": [{
+                        "name": "Crossref",
+                        "country": "US",
+                        "ROR": "https://ror.org/02twcfp32"
+                    }]
+                }],
+                "funder": [{
+                    "DOI": "10.13039/100004440",
+                    "name": "Wellcome Trust",
+                    "doi-asserted-by": "publisher",
+                    "funding-type": "contract",
+                    "funding-scheme": "Metadata quality initiative",
+                    "award": "CR-567"
+                }]
+            }}
+        ],
+        "deposited": {
+            "date-parts": [[
+                2018,
+                10,
+                23
+            ]],
+            "date-time": "2018-10-23T19:19:22Z",
+            "timestamp": 1540322362000
+        },
+        "score": 1,
+        "issued": {"date-parts": [[
+            2018,
+            8,
+            13
+        ]]},
+        "relation": {"finances": [{
+            "id-type": "doi",
+            "id": "10.32013/12345678",
+            "asserted-by": "subject",
+            "description": "article funded by grant"
+        }]}
+    }
+}
