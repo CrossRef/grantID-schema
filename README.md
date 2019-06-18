@@ -9,7 +9,8 @@ The proposed schema is [available for feedback](https://github.com/CrossRef/gran
 [Oxygen-generated documentation](http://data.crossref.org/reports/help/schema_doc/grantID/index.html) is available as well.
 
 ## Updates
-
+6/19/19 update:
+* award-start-date was added at the grant/award level to allow a single date to be applied to a grant, useful if the individual project dates differ from the overall award start date.
 The proposed schema has been updated March 5 based on feedback given in February. Updates made are:
 * additions to funding type taxonomy (prize, crowdfunding)
 * addition of country attribute with ISO 3166-1 alpha 2-letter country code values on institution element within investigator affiliation section (currently optional)
@@ -63,6 +64,7 @@ funder-id |funder identifier from [Crossref Funder Registry](https://www.crossre
 funding-scheme | scheme for grant or award as provided by the funder | optional
 
 ## Award dates
+Dates can be applied at the project level (via award-date). An award-start-date can be applied to the grant / award as a whole.
 
 Element / attribute | Description | Limits
 --------------------|-------------|-------
@@ -71,6 +73,7 @@ award-dates | container for date information | optional
 @end-date | actual end date of the award | optional
 @planned-start-date | planned start date of award | optional
 @planned-end-date | planned end date of award | optional
+award-start-date | start date of grant funding | optional
 
 ## Funding types
 
