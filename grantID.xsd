@@ -125,7 +125,7 @@
   <xsd:element name="body">
     <xsd:complexType>
       <xsd:sequence>
-        <xsd:element ref="grant">
+         <xsd:element ref="grant" minOccurs="1" maxOccurs="unbounded">
           <xsd:annotation>
             <xsd:documentation>Wrapper for grant metadata</xsd:documentation>
           </xsd:annotation>
