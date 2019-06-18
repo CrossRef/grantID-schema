@@ -11,6 +11,7 @@ The proposed schema is [available for feedback](https://github.com/CrossRef/gran
 ## Updates
 6/19/19 update:
 * award-start-date was added at the grant/award level to allow a single date to be applied to a grant, useful if the individual project dates differ from the overall award start date.
+
 The proposed schema has been updated March 5 based on feedback given in February. Updates made are:
 * additions to funding type taxonomy (prize, crowdfunding)
 * addition of country attribute with ISO 3166-1 alpha 2-letter country code values on institution element within investigator affiliation section (currently optional)
