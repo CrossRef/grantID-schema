@@ -93,7 +93,17 @@
                         "funding-percentage": "50",
                         "award": "CR-567"
                     }
-                ]
+                ],
+                "award-start-date": {"date-parts": [[
+                    2018,
+                    1,
+                    5
+                ]]},
+                "award-end-date": {"date-parts": [[
+                    2023,
+                    2,
+                    1
+                ]]}
             }},
             {"project": {
                 "project-title": [{
@@ -121,6 +131,11 @@
                 }]
             }}
         ],
+        "award-start-date": {"date-parts": [[
+            2018,
+            1,
+            1
+        ]]},
         "deposited": {
             "date-parts": [[
                 2018,
